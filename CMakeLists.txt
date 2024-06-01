@@ -5,12 +5,11 @@ project(cogito VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories
-include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Add source files
 set(LINALG_SOURCES
     src/linalg/Matrix.cpp
+    src/linalg/Operations.cpp
 )
 
 # Combine all source files
@@ -24,6 +23,8 @@ set(MAIN_SOURCES
 
 # Create the static library
 add_library(cogito STATIC ${SOURCES})
+# Include directories
+target_include_directories(cogito PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # Create test executables
 #add_executable(test_matrix tests/test_matrix.cpp)
