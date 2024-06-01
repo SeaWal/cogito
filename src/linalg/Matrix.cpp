@@ -28,7 +28,7 @@ void linalg::Matrix::Print()
 double& linalg::Matrix::operator()(std::size_t row, std::size_t col)
 {
     if(row > m_nRows || col > m_nCols) {
-        throw std::invalid_argument("Index is out of bounds.");
+        throw std::out_of_range("Index is out of bounds.");
     }
     return m_MatrixData[row*m_nCols + col];
 }
