@@ -12,7 +12,26 @@ linalg::Matrix::Matrix(std::size_t n_rows, std::size_t n_cols)
     }
 }
 
-linalg::Matrix::~Matrix() {}
+linalg::Matrix::Matrix(const std::vector<std::vector<double>>& data)
+{
+    m_nRows = data.size();
+    m_nCols = data.front().size();
+
+    m_MatrixData.reserve(m_nRows * m_nCols);
+    for(const auto& row : data) {
+        m_MatrixData.insert(m_MatrixData.end(), row.begin(), row.end());
+    }
+}
+
+linalg::Matrix::Matrix(std::size_t n_rows, std::size_t n_cols, const std::vector<double>& data)
+{
+    m_nRows = data.size();
+    if(n_rows * n_cols != data.size()) {
+        throw std::invalid_argument("The size of 'data' doesn't match the given n_rows * n_cols");
+    }
+
+    m_MatrixData = data;
+}
 
 
 linalg::Matrix linalg::Matrix::identity(std::size_t n_rows, std::size_t n_cols)

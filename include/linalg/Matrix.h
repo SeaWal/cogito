@@ -8,7 +8,10 @@ namespace linalg {
     {
     public:
         Matrix(std::size_t n_rows, std::size_t n_cols);
-        ~Matrix();
+        Matrix(const std::vector<std::vector<double>>& data);
+        Matrix(std::size_t n_rows, std::size_t n_cols, const std::vector<double>& data);
+
+        ~Matrix() = default;
 
         static Matrix identity(std::size_t n_rows, std::size_t n_cols);
         static Matrix zeros(std::size_t n_rows, std::size_t n_cols);
