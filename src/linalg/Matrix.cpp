@@ -71,9 +71,10 @@ void linalg::Matrix::Print()
         for(std::size_t j = 0; j < m_nCols; j++) {
             std::cout << m_MatrixData[(i * m_nCols) + j] << " ";
         }
-        std::cout << "\n";
+        if (i < m_nRows - 1)
+            std::cout << "\n";
     }
-    std::cout << "" << std::endl;
+    std::cout << std::endl;
 }
 
 
