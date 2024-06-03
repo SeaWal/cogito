@@ -100,3 +100,16 @@ linalg::Matrix linalg::hadamard_product(const linalg::Matrix& lhs, const linalg:
 
     return result;
 }
+
+double trace(const linalg::Matrix& mat)
+{
+    if(mat.rows() != mat.cols()) {
+        throw std::invalid_argument("Can't calculate the trace of non-square Matrix");
+    }
+    double result = 0.0f;
+    for(std::size_t i = 0; i < mat.rows(); i++) {
+        result += mat(i, i);
+    }
+
+    return result;
+}

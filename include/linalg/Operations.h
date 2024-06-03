@@ -13,7 +13,11 @@ namespace linalg {
     Matrix scalar_add(const linalg::Matrix& mat, double scalar);
     Matrix hadamard_product(const linalg::Matrix& lhs, const linalg::Matrix& rhs);
 
-    // double trace();
+    double trace(const linalg::Matrix& mat);
+
+    // LU decomp
+    // QR decomp
+    // Cholesky decomp
     // double det();
 
     // double dot(std::vector<double> vec1, std::vector<double> vec2);
