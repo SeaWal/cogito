@@ -59,3 +59,28 @@ linalg::Matrix linalg::mat_transpose(const linalg::Matrix& mat)
 
     return transposed;
 }
+
+linalg::Matrix linalg::scalar_multiply(const linalg::Matrix& mat, double scalar)
+{
+    linalg::Matrix result(mat.rows(), mat.cols());
+    for(std::size_t i = 0; i < mat.rows(); i++) {
+        for(std::size_t j = 0; j < mat.cols(); j++) {
+            result(i, j) = mat(i, j) * scalar;
+        }
+    }
+
+    return result;
+}
+
+linalg::Matrix linalg::scalar_add(const linalg::Matrix& mat, double scalar)
+{
+    linalg::Matrix result(mat.rows(), mat.cols());
+    for(std::size_t i = 0; i < mat.rows(); i++) {
+        for(std::size_t j = 0; j < mat.cols(); j++) {
+                        result(i, j) = mat(i, j) + scalar;
+
+        }
+    }
+
+    return result;
+}
