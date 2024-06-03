@@ -46,3 +46,16 @@ linalg::Matrix linalg::mat_flatten(const linalg::Matrix& mat, bool as_rowvec)
 
     return flattened;
 }
+
+// TODO: use Matrix copy constructor instead
+linalg::Matrix linalg::mat_transpose(const linalg::Matrix& mat)
+{
+    linalg::Matrix transposed(mat.cols(), mat.rows());
+    for(std::size_t i = 0; i < mat.rows(); i++) {
+        for(std::size_t j = 0; j < mat.cols(); j++) {
+            transposed(j, i) = mat(i, j);
+        }
+    }
+
+    return transposed;
+}
