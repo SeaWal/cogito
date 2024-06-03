@@ -11,7 +11,7 @@ namespace linalg {
     // Matrix mat_multiply(const linalg::Matrix& lhs, const linalg::Matrix& rhs);
     Matrix scalar_multiply(const linalg::Matrix& mat, double scalar);
     Matrix scalar_add(const linalg::Matrix& mat, double scalar);
-    // Matrix hadamard_product();
+    Matrix hadamard_product(const linalg::Matrix& lhs, const linalg::Matrix& rhs);
 
     // double trace();
     // double det();
