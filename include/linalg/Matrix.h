@@ -21,6 +21,8 @@ namespace linalg {
         std::size_t rows() const { return m_nRows; }
         std::size_t cols() const { return m_nCols; }
 
+        std::vector<double> get_row(std::size_t row);
+
         void Print();
 
         double& operator()(std::size_t row, std::size_t col);

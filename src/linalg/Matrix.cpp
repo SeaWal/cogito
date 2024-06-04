@@ -95,3 +95,14 @@ const double& linalg::Matrix::operator()(std::size_t row, std::size_t col) const
     return m_MatrixData[row*m_nCols + col];
 }
 
+
+std::vector<double> linalg::Matrix::get_row(std::size_t row)
+{
+    if(row > m_nRows - 1) {
+        throw std::out_of_range("Index is out of bounds.");
+    }
+    auto first = m_MatrixData.begin() + row*m_nCols;
+    auto last = m_MatrixData.begin() + row*m_nCols + m_nCols;
+    return std::vector<double>(first, last);
+}
+
