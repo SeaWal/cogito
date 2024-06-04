@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <random>
 
+
 linalg::Matrix::Matrix(std::size_t n_rows, std::size_t n_cols)
     : m_nRows(n_rows), m_nCols(n_cols), m_nElements(n_rows * n_cols), m_MatrixData(n_rows * n_cols)
 {
@@ -78,7 +79,7 @@ void linalg::Matrix::Print()
 }
 
 
-double& linalg::Matrix::operator()(std::size_t row, std::size_t col)
+inline double& linalg::Matrix::operator()(std::size_t row, std::size_t col)
 {
     if(row > m_nRows || col > m_nCols) {
         throw std::out_of_range("Index is out of bounds.");
