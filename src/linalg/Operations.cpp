@@ -126,3 +126,28 @@ double linalg::dot(const std::vector<double>& vec1, const std::vector<double>& v
 
     return std::inner_product(vec1.begin(), vec1.end(), vec2.begin(), 0.0);
 }
+
+
+linalg::Matrix linalg::mat_multiply(const linalg::Matrix& lhs, const linalg::Matrix& rhs)
+{
+    if(lhs.cols() != rhs.rows()) {
+        throw std::invalid_argument("Inner dimensions do not match");
+    }
+
+    std::size_t outer_row = lhs.rows();
+    std::size_t inner_dim = lhs.cols();
+    std::size_t outer_col = rhs.cols();
+
+    linalg::Matrix result(outer_row, outer_col);
+    for(std::size_t row = 0; row < outer_row; row++) {
+        for(std::size_t col = 0; col < outer_col; col++) {
+            double sum = 0.0;
+            for(std::size_t el = 0; el < inner_dim; el++) {
+                sum += lhs(row, el) * rhs(el, col);
+            }
+            result(row, col) = sum; 
+        }
+    }
+
+    return result;
+}
