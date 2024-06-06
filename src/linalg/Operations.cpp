@@ -38,7 +38,7 @@ linalg::Matrix linalg::mat_subtract(const linalg::Matrix& lhs, const linalg::Mat
 }
 
 // TODO: use Matrix copy constructor instead
-linalg::Matrix linalg::mat_flatten(const linalg::Matrix& mat, bool as_rowvec)
+linalg::Matrix linalg::mat_flatten(const linalg::Matrix& mat)
 {
     linalg::Matrix flattened(1, mat.rows() * mat.cols());
     for(std::size_t i = 0; i < mat.rows(); i++) {

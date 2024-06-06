@@ -79,7 +79,7 @@ void linalg::Matrix::Print()
 }
 
 
-inline double& linalg::Matrix::operator()(std::size_t row, std::size_t col)
+double& linalg::Matrix::operator()(std::size_t row, std::size_t col)
 {
     if(row > m_nRows || col > m_nCols) {
         throw std::out_of_range("Index is out of bounds.");

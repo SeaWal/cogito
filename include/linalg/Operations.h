@@ -6,7 +6,7 @@
 namespace linalg {
     Matrix mat_add(const linalg::Matrix& lhs, const linalg::Matrix& rhs);
     Matrix mat_subtract(const linalg::Matrix& lhs, const linalg::Matrix& rhs);
-    Matrix mat_flatten(const linalg::Matrix& mat, bool as_rowvec = true);
+    Matrix mat_flatten(const linalg::Matrix& mat);
     Matrix mat_transpose(const linalg::Matrix& mat);
     // Matrix mat_multiply(const linalg::Matrix& lhs, const linalg::Matrix& rhs);
     Matrix scalar_multiply(const linalg::Matrix& mat, double scalar);
