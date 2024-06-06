@@ -101,7 +101,7 @@ linalg::Matrix linalg::hadamard_product(const linalg::Matrix& lhs, const linalg:
     return result;
 }
 
-double trace(const linalg::Matrix& mat)
+double linalg::trace(const linalg::Matrix& mat)
 {
     if(mat.rows() != mat.cols()) {
         throw std::invalid_argument("Can't calculate the trace of non-square Matrix");
