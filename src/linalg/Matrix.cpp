@@ -106,3 +106,17 @@ std::vector<double> linalg::Matrix::get_row(std::size_t row)
     return std::vector<double>(first, last);
 }
 
+std::vector<double> linalg::Matrix::get_col(std::size_t col)
+{
+    if(col > m_nCols - 1) {
+        throw std::out_of_range("Index is out of bounds.");
+    }
+    
+    std::vector<double> col_data(m_nRows);
+    for(std::size_t row = 0; row < m_nRows; row++) {
+        col_data[row] = m_MatrixData[row*m_nCols + col];
+    }
+
+    return col_data;
+}
+
