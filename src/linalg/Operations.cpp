@@ -1,3 +1,6 @@
+#include <numeric>
+#include <vector>
+
 #include "linalg/Operations.h"
 #include "linalg/Matrix.h"
 
@@ -112,4 +115,14 @@ double linalg::trace(const linalg::Matrix& mat)
     }
 
     return result;
+}
+
+
+double linalg::dot(const std::vector<double>& vec1, const std::vector<double>& vec2)
+{
+    if(vec1.size() != vec2.size()) {
+        throw std::invalid_argument("Vectors must be same length");
+    }
+
+    return std::inner_product(vec1.begin(), vec1.end(), vec2.begin(), 0.0);
 }

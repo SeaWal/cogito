@@ -19,8 +19,11 @@ namespace linalg {
     // QR decomp
     // Cholesky decomp
     // double det();
+    // rank
+    // linear independence
+    // solver
 
-    // double dot(std::vector<double> vec1, std::vector<double> vec2);
+    double dot(const std::vector<double>& vec1, const std::vector<double>& vec2);
 
     // Matrix-vector multiplication
     // Matrix inverse/pinverse
