@@ -156,3 +156,38 @@ bool linalg::is_square(const linalg::Matrix& mat)
 {
     return mat.rows() == mat.cols();
 }
+
+// using Crout-Doolittle https://en.wikipedia.org/wiki/LU_decomposition#LU_Crout_decomposition
+std::pair<linalg::Matrix, linalg::Matrix> linalg::lu_decomp(const linalg::Matrix& mat)
+{
+    if(!linalg::is_square(mat)) {
+        throw std::runtime_error("Matrix must be square for LU decomposition");
+    }
+
+    std::size_t n = mat.rows();
+
+    linalg::Matrix L = linalg::Matrix::identity(n, n);
+    linalg::Matrix U = linalg::Matrix::zeros(n, n);
+    for(std::size_t i = 0; i < n; i++) {
+        // Upper triangular
+        for(std::size_t k = i; k < n; k++) {
+            // could replace this loop with dot-product?
+            double sum = 0.0;
+            for(std::size_t j = 0; j < i; j++) {
+                sum += L(i, j) * U(j, k);
+            }
+            U(i, k) = mat(i, k) - sum;
+        }
+
+        // Lower triangular
+        for(std::size_t k = i + 1; k < n; k++) {
+            double sum = 0.0;
+            for(std::size_t j = 0; j < i; j++) {
+                sum += L(k, j) * U(j, i);
+            }
+            L(k, i) = (mat(k, i) - sum) / U(i, i);
+        }
+    }
+
+    return std::make_pair(L, U);
+}

@@ -16,8 +16,9 @@ namespace linalg {
     double trace(const linalg::Matrix& mat);
     double dot(const std::vector<double>& vec1, const std::vector<double>& vec2);
     bool is_square(const Matrix& mat);
+    
+    std::pair<Matrix, Matrix> lu_decomp(const Matrix& mat);
 
-    // LU decomp
     // QR decomp
     // Cholesky decomp
     // double det();
