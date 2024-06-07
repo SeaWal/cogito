@@ -151,3 +151,8 @@ linalg::Matrix linalg::mat_multiply(const linalg::Matrix& lhs, const linalg::Mat
 
     return result;
 }
+
+bool linalg::is_square(const linalg::Matrix& mat)
+{
+    return mat.rows() == mat.cols();
+}
