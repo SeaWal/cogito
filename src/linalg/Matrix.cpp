@@ -1,9 +1,10 @@
-#include "linalg/Matrix.h"
 #include <cstddef>
 #include <iostream>
 #include <stdexcept>
 #include <random>
 
+#include "linalg/Matrix.h"
+#include "linalg/Operations.h"
 
 linalg::Matrix::Matrix(std::size_t n_rows, std::size_t n_cols)
     : m_nRows(n_rows), m_nCols(n_cols), m_nElements(n_rows * n_cols), m_MatrixData(n_rows * n_cols)
@@ -120,3 +121,7 @@ std::vector<double> linalg::Matrix::get_col(std::size_t col)
     return col_data;
 }
 
+linalg::Matrix linalg::Matrix::operator+(const linalg::Matrix& other) const
+{
+    return linalg::mat_add(*this, other);
+}
