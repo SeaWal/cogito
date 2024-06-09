@@ -125,3 +125,9 @@ linalg::Matrix linalg::Matrix::operator+(const linalg::Matrix& other) const
 {
     return linalg::mat_add(*this, other);
 }
+
+
+linalg::Matrix linalg::Matrix::operator+(const double scalar) const
+{
+    return linalg::scalar_add(*this, scalar);
+}

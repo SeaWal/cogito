@@ -30,6 +30,7 @@ namespace linalg {
         const double& operator()(std::size_t row, std::size_t col) const;
 
         Matrix operator+(const Matrix& other) const;
+        Matrix operator+(const double scalar) const;
 
     private:
         std::size_t m_nRows, m_nCols, m_nElements;
