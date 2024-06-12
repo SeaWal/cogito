@@ -25,6 +25,7 @@ namespace linalg {
         std::vector<double> get_col(std::size_t col);
 
         void Print();
+        bool isSquare();
 
         double& operator()(std::size_t row, std::size_t col);
         const double& operator()(std::size_t row, std::size_t col) const;

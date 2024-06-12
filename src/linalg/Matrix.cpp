@@ -79,6 +79,10 @@ void linalg::Matrix::Print()
     std::cout << std::endl;
 }
 
+bool linalg::Matrix::isSquare()
+{
+    return linalg::is_square(*this);
+}
 
 double& linalg::Matrix::operator()(std::size_t row, std::size_t col)
 {
