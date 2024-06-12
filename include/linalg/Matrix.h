@@ -32,6 +32,9 @@ namespace linalg {
         Matrix operator+(const Matrix& other) const;
         Matrix operator+(const double scalar) const;
 
+        Matrix operator-(const Matrix& other) const;
+        Matrix operator-(const double scalar) const;
+
         Matrix operator*(const Matrix& other) const;
         Matrix operator*(const double scalar) const;
 
