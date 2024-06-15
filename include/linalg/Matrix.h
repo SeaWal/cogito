@@ -2,14 +2,15 @@
 
 #include <cstddef>
 #include <vector>
-namespace linalg {
+namespace linalg
+{
 
     class Matrix
     {
     public:
         Matrix(std::size_t n_rows, std::size_t n_cols);
-        Matrix(const std::vector<std::vector<double>>& data);
-        Matrix(std::size_t n_rows, std::size_t n_cols, const std::vector<double>& data);
+        Matrix(const std::vector<std::vector<double>> &data);
+        Matrix(std::size_t n_rows, std::size_t n_cols, const std::vector<double> &data);
 
         ~Matrix() = default;
 
@@ -27,16 +28,16 @@ namespace linalg {
         void Print();
         bool isSquare();
 
-        double& operator()(std::size_t row, std::size_t col);
-        const double& operator()(std::size_t row, std::size_t col) const;
+        double &operator()(std::size_t row, std::size_t col);
+        const double &operator()(std::size_t row, std::size_t col) const;
 
-        Matrix operator+(const Matrix& other) const;
+        Matrix operator+(const Matrix &other) const;
         Matrix operator+(const double scalar) const;
 
-        Matrix operator-(const Matrix& other) const;
+        Matrix operator-(const Matrix &other) const;
         Matrix operator-(const double scalar) const;
 
-        Matrix operator*(const Matrix& other) const;
+        Matrix operator*(const Matrix &other) const;
         Matrix operator*(const double scalar) const;
 
     private:
