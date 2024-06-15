@@ -37,10 +37,24 @@ add_library(cogito STATIC ${SOURCES})
 # Include directories
 target_include_directories(cogito PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-# Create test executables
-#add_executable(test_matrix tests/test_matrix.cpp)
-#target_link_libraries(test_matrix cogito)
 
 # Create the main executable
 add_executable(main_executable ${MAIN_SOURCES})
 target_link_libraries(main_executable cogito)
+
+# Include tests
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.tar.gz
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+file(GLOB TEST_SOURCES tests/*.cpp)
+
+add_executable(tests ${TEST_SOURCES})
+target_link_libraries(tests cogito GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(tests)
