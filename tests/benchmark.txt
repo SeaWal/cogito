@@ -1,0 +1,55 @@
+// try move this tests/benchmark/benchmark.cpp
+// and add as standalone in CMakeLists
+
+#include <iostream>
+#include <chrono>
+#include "Matrix.h"  // Include your Matrix class header
+
+template<typename Func>
+double measure_execution_time(Func func, int iterations = 10) {
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int i = 0; i < iterations; ++i) {
+        func();
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+
+    return duration.count() / iterations;  // Return average time per iteration
+}
+
+void test_matrix_addition_performance() {
+    std::size_t matrix_size = 1000; // Example size
+    linalg::Matrix A = linalg::Matrix::random(matrix_size, matrix_size);
+    linalg::Matrix B = linalg::Matrix::random(matrix_size, matrix_size);
+
+    auto addition_func = [&A, &B]() {
+        linalg::Matrix C = A + B;
+    };
+
+    double avg_time = measure_execution_time(addition_func);
+    std::cout << "Average time for matrix addition: " << avg_time << " seconds" << std::endl;
+}
+
+void test_matrix_multiplication_performance() {
+    std::size_t matrix_size = 500; // Example size
+    linalg::Matrix A = linalg::Matrix::random(matrix_size, matrix_size);
+    linalg::Matrix B = linalg::Matrix::random(matrix_size, matrix_size);
+
+    auto multiplication_func = [&A, &B]() {
+        linalg::Matrix C = A * B;
+    };
+
+    double avg_time = measure_execution_time(multiplication_func);
+    std::cout << "Average time for matrix multiplication: " << avg_time << " seconds" << std::endl;
+}
+
+int main() {
+    test_matrix_addition_performance();
+    test_matrix_multiplication_performance();
+
+    // Add more performance tests as needed
+
+    return 0;
+}

@@ -92,8 +92,3 @@ TEST(MatrixConstructorTest, Vec1dConstructorThrowsExceptionOnUnequalDims)
 {
     EXPECT_THROW(linalg::Matrix(1, 1, {1.0, 2.0, 3.0}), std::invalid_argument);
 }
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
