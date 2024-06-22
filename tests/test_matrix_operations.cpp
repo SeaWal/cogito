@@ -70,3 +70,45 @@ TEST(LinAlgArithmeticTest, MatrixMultiplicationThrowsOnInnerDimMismatch)
     EXPECT_THROW(linalg::mat_multiply(A, B), std::invalid_argument);
 }
 
+
+TEST(LinAlgArithmeticTest, MatrixScalarAddition) 
+{
+    linalg::Matrix A({{1, 2}, {3, 4}});
+    A = linalg::scalar_add(A, 3.0);
+
+    EXPECT_EQ(A(0, 0), 4.0);
+    EXPECT_EQ(A(0, 1), 5.0);
+    EXPECT_EQ(A(1, 0), 6.0);
+    EXPECT_EQ(A(1, 1), 7.0);
+}
+
+TEST(LinAlgArithmeticTest, MatrixScalarMultiplication) 
+{
+    linalg::Matrix A({{1, 2}, {3, 4}});
+    A = linalg::scalar_multiply(A, 3.0);
+
+    EXPECT_EQ(A(0, 0), 3.0);
+    EXPECT_EQ(A(0, 1), 6.0);
+    EXPECT_EQ(A(1, 0), 9.0);
+    EXPECT_EQ(A(1, 1), 12.0);
+}
+
+TEST(LinAlgArithmeticTest, HadamardProduct) 
+{
+    linalg::Matrix A({{1, 2}, {3, 4}});
+    linalg::Matrix B({{2, 3}, {2, 5}});
+
+    linalg::Matrix C = linalg::hadamard_product(A, B);
+    EXPECT_EQ(C(0, 0), 2.0);
+    EXPECT_EQ(C(0, 1), 6.0);
+    EXPECT_EQ(C(1, 0), 6.0);
+    EXPECT_EQ(C(1, 1), 20.0);
+}
+
+TEST(LinAlgArithmeticTest, HadamardProductThrowsOnDimensionMismatch) 
+{
+    linalg::Matrix A({{1, 2}, {3, 4}});
+    linalg::Matrix B({{2, 3, 4}, {2, 5, 4}});
+
+    EXPECT_THROW(linalg::hadamard_product(A, B), std::invalid_argument);
+}
