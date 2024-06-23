@@ -112,3 +112,41 @@ TEST(LinAlgArithmeticTest, HadamardProductThrowsOnDimensionMismatch)
 
     EXPECT_THROW(linalg::hadamard_product(A, B), std::invalid_argument);
 }
+
+TEST(LinAlgArithmeticTest, VectorDotProduct)
+{
+    std::vector<double> vec1 = {1.0, 2.0, 3.0};
+    std::vector<double> vec2 = {3.0, 4.0, 5.0};
+
+    EXPECT_EQ(linalg::dot(vec1, vec2), 26.0);
+}
+
+TEST(LinAlgArithmeticTest, VectorDotProductThrowsOnUnequalSize)
+{
+    std::vector<double> vec1 = {1.0, 2.0, 3.0};
+    std::vector<double> vec2 = {3.0, 4.0, 5.0, 7.0};
+
+    EXPECT_THROW(linalg::dot(vec1, vec2), std::invalid_argument);
+}
+
+TEST(LinAlgArithmeticTest, MatrixLUDecomposition)
+{
+    linalg::Matrix mat({ {4.0, 3.0, 2.0}, {2.0, 1.0, 1.0}, {6.0, 7.0, 9.0} });
+    auto [L, U] = linalg::lu_decomp(mat);
+
+    linalg::Matrix expected_L({ {1.0, 0.0, 0.0}, {0.5, 1.0, 0.0}, {1.5, -5.0, 1.0} });
+    linalg::Matrix expected_U({ {4.0, 3.0, 2.0}, {0.0, -0.5, 0.0}, {0.0, 0.0, 6.0} });
+
+    for(std::size_t i = 0; i < 3; i++) {
+        for(std::size_t j = 0; j < 3; j++) {
+            EXPECT_EQ(L(i, j), expected_L(i, j));
+            EXPECT_EQ(U(i, j), expected_U(i, j));
+        }
+    }
+}
+
+TEST(LinAlgArithmeticTest, MatrixLUDecompThrowsOnNonSquareMatrix)
+{
+    linalg::Matrix mat({ {4.0, 3.0, 2.0}, {2.0, 1.0, 1.0} });
+    EXPECT_THROW(linalg::lu_decomp(mat), std::runtime_error);
+}
