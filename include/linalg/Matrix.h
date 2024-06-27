@@ -40,6 +40,8 @@ namespace linalg
         Matrix operator*(const Matrix &other) const;
         Matrix operator*(const double scalar) const;
 
+        bool operator==(const Matrix& other) const;
+
     private:
         std::size_t m_nRows, m_nCols, m_nElements;
         std::vector<double> m_MatrixData;
