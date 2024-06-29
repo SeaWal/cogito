@@ -23,9 +23,14 @@ set(LINALG_SOURCES
     src/linalg/Operations.cpp
 )
 
+set(NN_SOURCES
+    src/nn/Layer.cpp
+)
+
 # Combine all source files
 set(SOURCES
     ${LINALG_SOURCES}
+    ${NN_SOURCES}
 )
 
 set(MAIN_SOURCES
