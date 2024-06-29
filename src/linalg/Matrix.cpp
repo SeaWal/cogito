@@ -165,15 +165,19 @@ linalg::Matrix linalg::Matrix::operator*(const double scalar) const
     return linalg::scalar_multiply(*this, scalar);
 }
 
-bool linalg::Matrix::operator==(const linalg::Matrix& other) const
+bool linalg::Matrix::operator==(const linalg::Matrix &other) const
 {
-    if(m_nRows != other.rows() || m_nCols != other.cols()) {
+    if (m_nRows != other.rows() || m_nCols != other.cols())
+    {
         return false;
     }
 
-    for(std::size_t i = 0; i < m_nRows; i++) {
-        for(std::size_t j = 0; j < m_nCols; j++) {
-            if(std::fabs((*this)(i, j) - other(i, j)) > 1e-9) {
+    for (std::size_t i = 0; i < m_nRows; i++)
+    {
+        for (std::size_t j = 0; j < m_nCols; j++)
+        {
+            if (std::fabs((*this)(i, j) - other(i, j)) > 1e-9)
+            {
                 return false;
             }
         }
