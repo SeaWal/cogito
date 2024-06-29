@@ -217,3 +217,23 @@ std::pair<linalg::Matrix, linalg::Matrix> linalg::lu_decomp(const linalg::Matrix
 
     return std::make_pair(L, U);
 }
+
+
+linalg::Matrix linalg::mat_vec_multiply(const linalg::Matrix &mat, const std::vector<double> &vec)
+{
+    if (mat.cols() != vec.size()) {
+        throw std::invalid_argument("Matrix columns and vector size must match for multiplication.");
+    }
+
+    std::size_t rows = mat.rows();
+    std::size_t cols = mat.cols();
+    std::vector<double> result_data(rows, 0.0);
+
+    for (std::size_t i = 0; i < rows; ++i) {
+        for (std::size_t j = 0; j < cols; ++j) {
+            result_data[i] += mat(i, j) * vec[j];
+        }
+    }
+
+    return Matrix(rows, 1, result_data);
+}

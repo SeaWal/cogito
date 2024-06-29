@@ -150,3 +150,17 @@ TEST(LinAlgArithmeticTest, MatrixLUDecompThrowsOnNonSquareMatrix)
     linalg::Matrix mat({ {4.0, 3.0, 2.0}, {2.0, 1.0, 1.0} });
     EXPECT_THROW(linalg::lu_decomp(mat), std::runtime_error);
 }
+
+TEST(LinAlgArithmeticTest, MatrixVectorMultiplication)
+{
+    linalg::Matrix mat({ {1.0, 2.0, 3.0}, {4.0, 5.0, 6.0} });
+    std::vector<double> vec = {1.0, 2.0, 3.0};
+
+    linalg::Matrix result = linalg::mat_vec_multiply(mat, vec);
+
+    EXPECT_EQ(result.rows(), 2);
+    EXPECT_EQ(result.cols(), 1);
+
+    EXPECT_DOUBLE_EQ(result(0, 0), 14.0);
+    EXPECT_DOUBLE_EQ(result(1, 0), 32.0);
+}

@@ -20,6 +20,8 @@ namespace linalg
 
     std::pair<Matrix, Matrix> lu_decomp(const Matrix &mat);
 
+    Matrix mat_vec_multiply(const Matrix &mat, const std::vector<double> &vec);
+
     // QR decomp
     // Cholesky decomp
     // double det();
