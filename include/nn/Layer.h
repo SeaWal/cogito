@@ -15,7 +15,7 @@ public:
     virtual linalg::Matrix backward(const linalg::Matrix& output_grad) = 0;
     virtual void update_parameters(double learning_rate) = 0;
 
-    inline std::optional<std::string> name() { return m_Name; }
+    inline std::optional<std::string> name() const { return m_Name; }
 
 protected:
     std::optional<std::string> m_Name;
