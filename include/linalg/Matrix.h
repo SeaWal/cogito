@@ -8,6 +8,7 @@ namespace linalg
     class Matrix
     {
     public:
+        Matrix() : m_nRows(0), m_nCols(0), m_MatrixData() {};
         Matrix(std::size_t n_rows, std::size_t n_cols);
         Matrix(const std::vector<std::vector<double>> &data);
         Matrix(std::size_t n_rows, std::size_t n_cols, const std::vector<double> &data);
