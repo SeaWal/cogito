@@ -24,7 +24,7 @@ set(LINALG_SOURCES
 )
 
 set(NN_SOURCES
-    src/nn/Layer.cpp
+    src/nn/Dense.cpp
 )
 
 # Combine all source files
