@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <numeric>
 #include <vector>
 
@@ -236,4 +237,17 @@ linalg::Matrix linalg::mat_vec_multiply(const linalg::Matrix &mat, const std::ve
     }
 
     return Matrix(rows, 1, result_data);
+}
+
+// element-wise max 
+linalg::Matrix linalg::max(const linalg::Matrix& mat, const double x)
+{
+    linalg::Matrix res(mat.rows(), mat.cols());
+    for(std::size_t i = 0; i < mat.rows(); i++) {
+        for(std::size_t j = 0; j < mat.cols(); j++) {
+            res(i, j) = std::max(mat(i, j), x);
+        }
+    }
+
+    return res;
 }

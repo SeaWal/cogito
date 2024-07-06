@@ -37,3 +37,14 @@ TEST (MatrixUtilTest, MatrixTraceThrowsIfNotSquare)
 
     EXPECT_THROW(linalg::trace(A), std::invalid_argument);
 }
+
+TEST(MatrixUtilTest, ElementWiseMax)
+{
+    Matrix mat({ {1.0, 2.0, 3.0}, {2.0, 1.0, 0.5}, {0.5, 3.0, 2.5} });
+
+    Matrix res = linalg::max(mat, 2.0);
+
+    Matrix expected({ {2.0, 2.0, 3.0}, {2.0, 2.0, 2.0}, {2.0, 3.0, 2.5} });
+
+    EXPECT_EQ(res, expected);
+}

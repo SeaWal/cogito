@@ -22,6 +22,8 @@ namespace linalg
 
     Matrix mat_vec_multiply(const Matrix &mat, const std::vector<double> &vec);
 
+    Matrix max(const Matrix& mat, const double x);
+
     // QR decomp
     // Cholesky decomp
     // double det();
