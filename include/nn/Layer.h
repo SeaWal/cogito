@@ -8,7 +8,7 @@ class Layer
 {
 public:
     Layer() = default;
-    Layer(std::optional<std::string> name = std::nullopt) : m_Name(name) {}
+    explicit Layer(std::optional<std::string> name = std::nullopt) : m_Name(name) {}
     virtual ~Layer() = default;
 
     virtual linalg::Matrix forward(const linalg::Matrix& input) = 0;
