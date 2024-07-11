@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "Layer.h"
+#include "nn/Layer.h"
 #include "linalg/Matrix.h"
 
 class NeuralNetwork
