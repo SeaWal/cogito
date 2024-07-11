@@ -26,6 +26,7 @@ set(LINALG_SOURCES
 set(NN_SOURCES
     src/nn/Dense.cpp
     src/nn/Relu.cpp
+    src/nn/NeuralNetwork.cpp
 )
 
 # Combine all source files
