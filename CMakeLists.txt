@@ -27,6 +27,7 @@ set(NN_SOURCES
     src/nn/Dense.cpp
     src/nn/Relu.cpp
     src/nn/NeuralNetwork.cpp
+    src/nn/MeanSquaredError.cpp
 )
 
 # Combine all source files
