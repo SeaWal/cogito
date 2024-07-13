@@ -1,5 +1,5 @@
 #include "linalg/Matrix.h"
-#include "MeanSquaredError.h"
+#include "nn/MeanSquaredError.h"
 
 double compute(const linalg::Matrix &output, const linalg::Matrix &target)
 {
