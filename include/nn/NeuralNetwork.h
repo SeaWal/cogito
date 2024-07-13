@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "nn/Layer.h"
+#include "nn/LossFunction.h"
 #include "linalg/Matrix.h"
 
 class NeuralNetwork
@@ -14,8 +15,11 @@ public:
     linalg::Matrix forward(const linalg::Matrix &input);
     void backward(const linalg::Matrix &loss_grad);
     void update_parameters(const double learning_rate);
+
+    template<typename LossFunc>
     void train(const linalg::Matrix &input, const linalg::Matrix &target,
-               const std::size_t epochs, const double learning_rate);
+                LossFunc loss_fn, const std::size_t epochs, const double learning_rate)
+                requires LossFunctionConcept<LossFunc>;
 
 private:
     std::vector<std::unique_ptr<Layer>> m_Layers;
