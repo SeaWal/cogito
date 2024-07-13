@@ -10,7 +10,7 @@ public:
 };
 
 template <typename T>
-concept LossFunctionConcept = requires(T loss_fn, const Matrix &predicted, const Matrix &target) {
+concept LossFunctionConcept = requires(T loss_fn, const linalg::Matrix &predicted, const linalg::Matrix &target) {
     { loss_fn.compute(predicted, target) } -> std::convertible_to<double>;
-    { loss_fn.gradient(predicted, target) } -> std::convertible_to<Matrix>;
+    { loss_fn.gradient(predicted, target) } -> std::convertible_to<linalg::Matrix>;
 };
