@@ -16,10 +16,9 @@ public:
     void backward(const linalg::Matrix &loss_grad);
     void update_parameters(const double learning_rate);
 
-    template<typename LossFunc>
+    template<LossFunctionConcept LossFunc>
     void train(const linalg::Matrix &input, const linalg::Matrix &target,
-                LossFunc loss_fn, const std::size_t epochs, const double learning_rate)
-                requires LossFunctionConcept<LossFunc>;
+                LossFunc& loss_fn, const std::size_t epochs, const double learning_rate);
 
 private:
     std::vector<std::unique_ptr<Layer>> m_Layers;

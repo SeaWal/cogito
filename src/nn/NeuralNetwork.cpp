@@ -39,10 +39,9 @@ void NeuralNetwork::update_parameters(const double learning_rate)
     }
 }
 
-template<typename LossFunc>
+template<LossFunctionConcept LossFunc>
 void NeuralNetwork::train(const linalg::Matrix &input, const linalg::Matrix &target,
-        LossFunc loss_fn, const std::size_t epochs, const double learning_rate)
-        requires LossFunctionConcept<LossFunc>
+        LossFunc& loss_fn, const std::size_t epochs, const double learning_rate)
 {
     for(std::size_t epoch = 0; epoch < epochs; epoch++) {
         linalg::Matrix predicted = forward(input);
