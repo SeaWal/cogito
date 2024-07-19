@@ -1,7 +1,7 @@
 #include "linalg/Matrix.h"
 #include "nn/MeanSquaredError.h"
 
-double compute(const linalg::Matrix &output, const linalg::Matrix &target)
+double MeanSquaredError::compute(const linalg::Matrix &output, const linalg::Matrix &target) const
 {
     double loss = 0.0;
     for (std::size_t i = 0; i < output.rows(); ++i)
@@ -15,7 +15,7 @@ double compute(const linalg::Matrix &output, const linalg::Matrix &target)
     return loss / output.rows();
 }
 
-linalg::Matrix gradient(const linalg::Matrix &output, const linalg::Matrix &target)
+linalg::Matrix MeanSquaredError::gradient(const linalg::Matrix &output, const linalg::Matrix &target) const
 {
     linalg::Matrix grad(output.rows(), output.cols());
     for (std::size_t i = 0; i < output.rows(); ++i)
