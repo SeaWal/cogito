@@ -23,3 +23,5 @@ public:
 private:
     std::vector<std::unique_ptr<Layer>> m_Layers;
 };
+
+#include "nn/NeuralNetwork.tpp"
