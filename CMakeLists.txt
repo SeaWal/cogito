@@ -28,6 +28,7 @@ set(NN_SOURCES
     src/nn/Relu.cpp
     src/nn/NeuralNetwork.cpp
     src/nn/MeanSquaredError.cpp
+    src/nn/Sigmoid.cpp
 )
 
 # Combine all source files
