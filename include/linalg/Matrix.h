@@ -22,6 +22,9 @@ namespace linalg
     public:
         std::size_t rows() const { return m_nRows; }
         std::size_t cols() const { return m_nCols; }
+        std::pair<std::size_t, std::size_t> dims() const { 
+            return std::make_pair(m_nRows, m_nCols); 
+        }
 
         std::vector<double> get_row(std::size_t row);
         std::vector<double> get_col(std::size_t col);
