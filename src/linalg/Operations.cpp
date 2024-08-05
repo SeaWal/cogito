@@ -5,13 +5,11 @@
 #include "linalg/Operations.h"
 #include "linalg/Matrix.h"
 
+#include "common/Checks.h"
+
 linalg::Matrix linalg::mat_add(const linalg::Matrix &lhs, const linalg::Matrix &rhs)
 {
-    if (lhs.rows() != rhs.rows() && lhs.cols() != rhs.cols())
-    {
-        throw std::invalid_argument("Matrix dimensions must match.");
-    }
-
+    check_full_dims(lhs, rhs);
     linalg::Matrix result(lhs.rows(), lhs.cols());
     for (std::size_t i = 0; i < lhs.rows(); i++)
     {
@@ -26,11 +24,7 @@ linalg::Matrix linalg::mat_add(const linalg::Matrix &lhs, const linalg::Matrix &
 
 linalg::Matrix linalg::mat_subtract(const linalg::Matrix &lhs, const linalg::Matrix &rhs)
 {
-    if (lhs.rows() != rhs.rows() && lhs.cols() != rhs.cols())
-    {
-        throw std::invalid_argument("Matrix dimensions must match.");
-    }
-
+    check_full_dims(lhs, rhs);
     linalg::Matrix result(lhs.rows(), lhs.cols());
     for (std::size_t i = 0; i < lhs.rows(); i++)
     {
@@ -103,11 +97,7 @@ linalg::Matrix linalg::scalar_add(const linalg::Matrix &mat, double scalar)
 
 linalg::Matrix linalg::hadamard_product(const linalg::Matrix &lhs, const linalg::Matrix &rhs)
 {
-    if (lhs.rows() != rhs.rows() || lhs.cols() != rhs.cols())
-    {
-        throw std::invalid_argument("For Hadamard product, matrix dimensions must match");
-    }
-
+    check_full_dims(lhs, rhs);
     linalg::Matrix result(lhs.rows(), lhs.cols());
     for (std::size_t i = 0; i < lhs.rows(); i++)
     {
@@ -147,11 +137,7 @@ double linalg::dot(const std::vector<double> &vec1, const std::vector<double> &v
 
 linalg::Matrix linalg::mat_multiply(const linalg::Matrix &lhs, const linalg::Matrix &rhs)
 {
-    if (lhs.cols() != rhs.rows())
-    {
-        throw std::invalid_argument("Inner dimensions do not match");
-    }
-
+    check_inner_dims(lhs, rhs);
     std::size_t outer_row = lhs.rows();
     std::size_t inner_dim = lhs.cols();
     std::size_t outer_col = rhs.cols();
