@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "linalg/Matrix.h"
 #include "linalg/Operations.h"
+#include "common/Exception.h"
 
 TEST(LinAlgArithmeticTest, MatrixAddition)
 {
@@ -23,7 +24,7 @@ TEST(LinAlgArithmeticTest, MatrixAdditionThrowsOnDimensionMismatch)
     linalg::Matrix A = linalg::Matrix::random(2, 3);
     linalg::Matrix B = linalg::Matrix::random(4, 6);
 
-    EXPECT_THROW(linalg::mat_add(A, B), std::invalid_argument);
+    EXPECT_THROW(linalg::mat_add(A, B), DimensionMismatchException);
 }
 
 TEST(LinAlgArithmeticTest, MatrixSubtraction)
@@ -44,7 +45,7 @@ TEST(LinAlgArithmeticTest, MatrixSubtractionThrowsOnDimensionMismatch)
     linalg::Matrix A = linalg::Matrix::random(2, 3);
     linalg::Matrix B = linalg::Matrix::random(4, 6);
 
-    EXPECT_THROW(linalg::mat_subtract(A, B), std::invalid_argument);
+    EXPECT_THROW(linalg::mat_subtract(A, B), DimensionMismatchException);
 }
 
 TEST(LinAlgArithmeticTest, MatrixMultiplication) 
@@ -67,7 +68,7 @@ TEST(LinAlgArithmeticTest, MatrixMultiplicationThrowsOnInnerDimMismatch)
     linalg::Matrix A = linalg::Matrix::random(2, 3);
     linalg::Matrix B = linalg::Matrix::random(4, 6);
 
-    EXPECT_THROW(linalg::mat_multiply(A, B), std::invalid_argument);
+    EXPECT_THROW(linalg::mat_multiply(A, B), DimensionMismatchException);
 }
 
 
@@ -110,7 +111,7 @@ TEST(LinAlgArithmeticTest, HadamardProductThrowsOnDimensionMismatch)
     linalg::Matrix A({{1, 2}, {3, 4}});
     linalg::Matrix B({{2, 3, 4}, {2, 5, 4}});
 
-    EXPECT_THROW(linalg::hadamard_product(A, B), std::invalid_argument);
+    EXPECT_THROW(linalg::hadamard_product(A, B), DimensionMismatchException);
 }
 
 TEST(LinAlgArithmeticTest, VectorDotProduct)
