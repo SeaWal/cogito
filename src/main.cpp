@@ -1,31 +1,44 @@
 #include "linalg/Matrix.h"
 #include "linalg/Operations.h"
+#include "nn/Dense.h"
+#include "nn/Relu.h"
+#include "nn/Sigmoid.h"
+#include "nn/NeuralNetwork.h"
+#include "nn/MeanSquaredError.h"
 #include <iostream>
 
 int main()
 {
-    linalg::Matrix mat1 = linalg::Matrix(3, 3);
-    mat1(0, 0) = 1;
-    mat1(0, 1) = 2;
-    mat1(0, 2) = 3;
-    mat1(1, 0) = 4;
-    mat1(1, 1) = 5;
-    mat1(1, 2) = 6;
-    mat1(2, 0) = 7;
-    mat1(2, 1) = 8;
-    mat1(2, 2) = 9;
+    NeuralNetwork network;
+    network.add_layer(std::make_unique<Dense>(2, 2, "HiddenLayer"));
+    network.add_layer(std::make_unique<Sigmoid>("Sigmoid_1"));
+    network.add_layer(std::make_unique<Dense>(1, 2, "OutputLayer"));
+    network.add_layer(std::make_unique<Sigmoid>("Sigmoid_2"));
 
-    linalg::Matrix mat2 = linalg::Matrix(3, 3);
-    mat2(0, 0) = 1;
-    mat2(0, 1) = 2;
-    mat2(0, 2) = 3;
-    mat2(1, 0) = 4;
-    mat2(1, 1) = 5;
-    mat2(1, 2) = 6;
-    mat2(2, 0) = 7;
-    mat2(2, 1) = 8;
-    mat2(2, 2) = 9;
+    linalg::Matrix XOR_inputs({
+        {0, 0},
+        {0, 1},
+        {1, 0},
+        {1, 1}
+    });
 
-    linalg::Matrix mat3 = linalg::mat_add(mat1, mat2);
-    mat3.Print();
+    linalg::Matrix XOR_targets({
+        {0},
+        {1},
+        {1},
+        {0}
+    });
+
+    // Train the Neural Network
+    MeanSquaredError mse;
+    network.train(XOR_inputs, XOR_targets, mse, 1000, 0.1);
+
+    linalg::Matrix predictions = network.forward(XOR_inputs);
+
+    for (std::size_t i = 0; i < XOR_inputs.rows(); ++i)
+    {
+        std::cout << "Input: (" << XOR_inputs(i, 0) << ", " << XOR_inputs(i, 1) << ") ";
+        std::cout << "Predicted Value: " << predictions(i, 0) << " | Actual Value: " 
+            << XOR_targets(i, 0) << "\n";
+    }
 }

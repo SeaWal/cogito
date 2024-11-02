@@ -165,3 +165,25 @@ TEST(LinAlgArithmeticTest, MatrixVectorMultiplication)
     EXPECT_DOUBLE_EQ(result(0, 0), 14.0);
     EXPECT_DOUBLE_EQ(result(1, 0), 32.0);
 }
+
+TEST(LinAlgArithmeticTest, MatrixRowSum)
+{
+    linalg::Matrix mat({ {1.0, 2.0, 3.0}, {1.0, 2.0, 3.0}, {1.0, 2.0, 3.0} });
+    linalg::Matrix rowSum = linalg::rowsum(mat);
+    EXPECT_EQ(rowSum.cols(), 1);
+    EXPECT_EQ(rowSum.rows(), 3);
+    EXPECT_EQ(rowSum(0, 0), 6.0);
+    EXPECT_EQ(rowSum(1, 0), 6.0);
+    EXPECT_EQ(rowSum(2, 0), 6.0);
+}
+
+TEST(LinAlgArithmeticTest, MatrixColSum)
+{
+    linalg::Matrix mat({ {1.0, 2.0, 3.0}, {1.0, 2.0, 3.0}, {1.0, 2.0, 3.0} });
+    linalg::Matrix colSum = linalg::colsum(mat);
+    EXPECT_EQ(colSum.cols(), 3);
+    EXPECT_EQ(colSum.rows(), 1);
+    EXPECT_EQ(colSum(0, 0), 3.0);
+    EXPECT_EQ(colSum(0, 1), 6.0);
+    EXPECT_EQ(colSum(0, 2), 9.0);
+}

@@ -7,44 +7,48 @@
 using linalg::Matrix;
 
 namespace {
-
-    Matrix broadcast_biases(const Matrix& biases, std::size_t num_samples)
+    Matrix broadcast_biases(const Matrix& biases, std::size_t ns)
     {
-        Matrix broadcasted_biases(biases.rows(), num_samples);
-        for (std::size_t i = 0; i < num_samples; ++i) {
-            for (std::size_t j = 0; j < biases.rows(); ++j) {
-                broadcasted_biases(j, i) = biases(j, 0);
+        Matrix bcast(ns, biases.cols());
+        for(std::size_t i = 0; i < ns; i++) {
+            for(std::size_t j = 0; j < biases.cols(); j++) {
+                bcast(i, j) = biases(0, j);
             }
         }
-        return broadcasted_biases;
+
+        return bcast;
     }
 }
 
-Dense::Dense(std::size_t input_dim, std::size_t output_dim, std::optional<std::string> name = std::nullopt)
+// this is wrong, should be output_dim (n_neurons) followed input_dim 
+Dense::Dense(std::size_t n_neurons, std::size_t n_inputs, std::optional<std::string> name = std::nullopt)
     : Layer(name)
 {
-    m_InputDim = input_dim;
-    m_OutputDim = output_dim;
-    m_Weights = Matrix::random(output_dim, input_dim);
-    m_Biases = Matrix::random(output_dim, 1);
+    m_InputDim = n_inputs;
+    m_OutputDim = n_neurons;
+    // W.shape should be (n_inputs, n_neurons)
+    m_Weights = Matrix::random(n_inputs, n_neurons);
+    m_Biases = Matrix::random(1, n_neurons); // switch order?
 }
 
 Matrix Dense::forward(const Matrix &input)
 {
     m_Input = input;
-    return (m_Weights * linalg::mat_transpose(input)) + broadcast_biases(m_Biases, input.rows());
+    return (input * m_Weights) + broadcast_biases(m_Biases, input.rows());
 }
 
 Matrix Dense::backward(const Matrix &output_grad)
 {
-    Matrix grad_input = linalg::mat_transpose(m_Weights) * output_grad;
-    m_WeightsGrad = output_grad * linalg::mat_transpose(m_Input);
-    m_BiasesGrad = output_grad; // this is not necessarily correct
-    return grad_input;
+    Matrix WT = linalg::mat_transpose(m_Weights);
+    Matrix IT = linalg::mat_transpose(m_Input);
+
+    m_WeightsGrad = IT * output_grad;
+    m_BiasesGrad = linalg::colsum(output_grad);
+    return output_grad * WT;
 }
 
 void Dense::update_parameters(double learning_rate)
 {
     m_Weights = m_Weights - (m_WeightsGrad * learning_rate);
-    m_Biases = m_Biases - (m_Biases * learning_rate);
+    m_Biases = m_Biases - (m_BiasesGrad * learning_rate);
 }

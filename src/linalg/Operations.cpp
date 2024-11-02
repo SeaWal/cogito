@@ -237,3 +237,39 @@ linalg::Matrix linalg::max(const linalg::Matrix& mat, const double x)
 
     return res;
 }
+
+/*
+Returns a Matrix containing the sum of elements in each row
+
+@param mat: const Matrix&
+*/
+linalg::Matrix linalg::rowsum(const Matrix& mat)
+{
+    linalg::Matrix res(mat.rows(), 1);
+    for(std::size_t i = 0; i < mat.rows(); i++) {
+        double sum = 0.0;
+        for(std::size_t j = 0; j < mat.cols(); j++) {
+            sum += mat(i, j);
+        }
+        res(i, 0) = sum;
+    }
+    return res;
+}
+
+/*
+Returns a Matrix containing the sum of elements in each column
+
+@param mat: const Matrix&
+*/
+linalg::Matrix linalg::colsum(const Matrix& mat)
+{
+    linalg::Matrix res(1, mat.cols());
+    for(std::size_t i = 0; i < mat.cols(); i++) {
+        double sum = 0.0;
+        for(std::size_t j = 0; j < mat.rows(); j++) {
+            sum += mat(j, i);
+        }
+        res(0, i) = sum;
+    }
+    return res;
+}
