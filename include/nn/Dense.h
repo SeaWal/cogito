@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <optional>
 #include <string>
 
@@ -16,6 +17,14 @@ public:
     Matrix forward(const Matrix& input) override;
     Matrix backward(const Matrix& output_grad) override;
     void update_parameters(double learning_rate) override;
+    void Print() override
+    {
+        std::cout << "weights = [\n";
+        m_Weights.Print();
+        std::cout << "]\nbiases = [\n";
+        m_Biases.Print();
+        std::cout << "\n" << std::endl;
+    }
 
 private:
     std::size_t m_InputDim;

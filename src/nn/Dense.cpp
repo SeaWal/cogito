@@ -20,15 +20,13 @@ namespace {
     }
 }
 
-// this is wrong, should be output_dim (n_neurons) followed input_dim 
 Dense::Dense(std::size_t n_neurons, std::size_t n_inputs, std::optional<std::string> name = std::nullopt)
     : Layer(name)
 {
     m_InputDim = n_inputs;
     m_OutputDim = n_neurons;
-    // W.shape should be (n_inputs, n_neurons)
-    m_Weights = Matrix::random(n_inputs, n_neurons);
-    m_Biases = Matrix::random(1, n_neurons); // switch order?
+    m_Weights = Matrix::random(n_inputs, n_neurons) - 0.5;
+    m_Biases = Matrix::random(1, n_neurons) - 0.5;
 }
 
 Matrix Dense::forward(const Matrix &input)

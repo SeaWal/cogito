@@ -31,7 +31,7 @@ int main()
 
     // Train the Neural Network
     MeanSquaredError mse;
-    network.train(XOR_inputs, XOR_targets, mse, 1000, 0.1);
+    network.train(XOR_inputs, XOR_targets, mse, 10000, 0.5);
 
     linalg::Matrix predictions = network.forward(XOR_inputs);
 

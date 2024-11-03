@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
@@ -18,6 +19,7 @@ public:
     virtual void update_parameters(double learning_rate) = 0;
 
     inline std::optional<std::string> name() const { return m_Name; }
+    virtual void Print() { std::cout << "" << std::endl; }
 
 protected:
     std::optional<std::string> m_Name;
